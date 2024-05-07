@@ -21,26 +21,25 @@ jobs:
     - name: check files
       run: ls -a 
     
-  second:
+  download:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Download text file
+      uses: actions/download-artifact@v4
+      with:
+        name: hello.txt
+        path: ./artifact
       
     - name: check files
       run: |
           ls -a 
-          mkdir ./artifact
       
-    - name: Download text file
-      uses: actions/download-artifact@v4
-      with:
-        name: hello-artifact
-        path: hello.txt
-    - name: copy artifact
-      run: cp hello.txt ./artifact
+    # - name: copy artifact
+    #   run: cp hello.txt ./artifact
         
     - name: display content
       run: cat ./artifacts/hello.txt

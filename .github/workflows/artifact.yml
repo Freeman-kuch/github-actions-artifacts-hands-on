@@ -29,10 +29,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
+    - name: check files
+      run: |
+          ls -a 
+          mkdir ./artifact
+      
     - name: Download text file
       uses: actions/download-artifact@v4
       with:
         name: hello-artifact
-        path: ./artifacts
+        path: hello.txt
+    - name: copy artifact
+      run: cp hello.txt ./artifact
+        
     - name: display content
       run: cat ./artifacts/hello.txt
